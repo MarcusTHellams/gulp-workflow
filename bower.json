@@ -1,0 +1,23 @@
+{
+  "name": "gulpexp",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Marcus T. Hellams"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.2",
+    "bootstrap": "^3.3.7",
+    "bootstrap-sass": "^3.3.7"
+  }
+}

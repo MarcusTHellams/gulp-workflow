@@ -1,0 +1,38 @@
+@import "_var.scss";
+@import "../libs/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+
+
+#main p {
+  color: #00ff00;
+  width: 97%;
+
+  .redbox {
+    background-color: #ff0000;
+    color: #000000;
+  }
+}
+
+.no-class {
+    color: green;
+}
+/*CSS Comment*/
+.full-of-class{
+    background-color: $secondary-color; 
+}
+
+.btn-marcus {
+  @include button-variant(white, aqua, darken(aqua, 10%));
+}
+
+.btn-block + .btn-block {
+  margin-top: 20px;
+}
+
+
+  @include list-group-item-variant(marcus,rgb(64%, 1.9%, 1.9%) , white);
+
+  .has-marcus {
+  @include form-control-validation(rgb(0%, 100%, 94.8%), rgb(0%, 100%, 94.8%),rgb(0%, 100%, 94.8%));
+}
+
+
