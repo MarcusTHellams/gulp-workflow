@@ -7,11 +7,16 @@ var gulp = require('gulp'),
 	connect = require('gulp-connect'),
 	concat = require('gulp-concat'),
 	uglify = require('gulp-uglify'),
-	clean = require('gulp-cssnano'),
+	clean = require('gulp-clean-css'),
 	strip_debug = require('gulp-strip-debug'),
 	logging = require('gulp-remove-logging'),
 	sass = require('gulp-sass'),
 	ruby = require('gulp-ruby-sass'),
+	replace = require('gulp-string-replace'),
+	replace2 = require('gulp-replace'),
+	autoprefixer = require('gulp-autoprefixer'),
+	concat2 = require('gulp-concat-sourcemap'),
+	merge = require('gulp-merge'),
 	filesToConcat = [
 		'public/libs/jquery/dist/jquery.min.js',
 		'public/libs/bootstrap/dist/js/bootstrap.min.js',
@@ -25,8 +30,8 @@ var gulp = require('gulp'),
 	config = {
 		sassPath: 'public/sass/',
 		bowerDir: 'public/libs/'
-};
-	
+	};
+
 gulp.task('strip', function () {
 	gulp.src('public/js/main.js')
 		.pipe(strip_debug())
@@ -34,21 +39,45 @@ gulp.task('strip', function () {
 
 });
 
-gulp.task('removeLogging', function(){
-	
+var g = gulp.task('replace', function () {
+
+	return gulp.src('public/dist/js/**/*.js')
+		.pipe(replace(/console\.log\(.+?\)/g, 'void 0'))
+		.pipe(gulp.dest('public/dist/js/'));
 });
 
 
 gulp.task('concatAndMinify', function (done) {
-	gulp.src(filesToConcat)
+	merge(
+		gulp.src(filesToConcat)
+			.pipe(replace(/console\.log\(.+?\)/g, 'void 0'))
+	)
 		.pipe(source.init())
-		// .pipe(strip_debug())
-		// .pipe(logging({ methods: ['log', 'info'] }))
 		.pipe(concat('bundle.js'))
 		.pipe(uglify())
 		.pipe(source.write())
-		.pipe(gulp.dest('public/dist/js/'))
-		.pipe(connect.reload());
+		.pipe(gulp.dest('public/dist/js/'));
+
+
+	// gulp.src(filesToConcat)
+	// 	.pipe(source.init())
+	// 	// .pipe(strip_debug())
+	// 	.pipe(logging({
+	// 		replaceWith: '0;'
+	// 	}))
+	// 	.pipe(concat('bundle.js'))
+	// 	.pipe(uglify({
+	// 		conpress: {
+	// 			global_defs: {
+	// 				"DEBUG": false
+	// 			}
+
+	// 		}
+	// 	}))
+	// 	.pipe(source.write())
+	// 	.pipe(gulp.dest('public/dist/js/'));
+
+	// gulp.start('replace');
 
 	done();
 
@@ -56,19 +85,22 @@ gulp.task('concatAndMinify', function (done) {
 
 gulp.task('sass', function (done) {
 	// gulp.src(['public/sass/**/*.scss'])
-	// 	.pipe(source.init())
-	// 	// .pipe(sass().on('error', sass.logError))
-	// 	.pipe(ruby({
-	// 		loadPath: [
-	// 			config.sassPath,
+	// 	.pipe(sass({
+	// 		includePaths: [
+	// 			config.sassPath + '**/*.scss',
 	// 			config.bowerDir + 'bootstrap-sass/assets/stylesheets/'
 	// 		]
-	// 	}).on('error', ruby.logError))
-	// 	.pipe(concat('bundle.css'))
-	// 	.pipe(clean())
-	// 	.pipe(source.write())
-	// 	.pipe(gulp.dest('public/css/'))
-	// 	.pipe(connect.reload());
+	// 	}).on('error', sass.logError))
+	// 	// .pipe(ruby({
+	// 	// 	loadPath: [
+	// 	// 		config.sassPath,
+	// 	// 		config.bowerDir + 'bootstrap-sass/assets/stylesheets/'
+	// 	// 	]
+	// 	// }).on('error', ruby.logError))
+	// 	.pipe(concat2('bundle.css'))
+	// 	// .pipe(clean())
+	// 	.pipe(gulp.dest('public/css/'));
+	// // 	.pipe(connect.reload());
 
 	ruby(['public/sass/**/*.scss'],
 		{
@@ -119,7 +151,7 @@ gulp.task('reload', function () {
 		connect.reload();
 	}, 500);
 
-})
+});
 
 gulp.task('watch', function () {
 	// Endless stream mode 
