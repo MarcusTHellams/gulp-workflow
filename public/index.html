@@ -2,52 +2,52 @@
 <html ng-app="myApp">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Gulp</title>
-	<link rel="stylesheet" type="text/css" href="css/bundle.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Gulp</title>
+    <link rel="stylesheet" type="text/css" href="css/bundle.css">
 </head>
 
-<body ng-controller="myController">
-	<div class="jumbotron">
-		<h1 class="text-center">Hello World.</h1>
-	</div>
-	<br>
-	<br>
-	<br>
-	<div class="container">
-		<button ng-click="changeUrl()" class="btn btn-marcus btn-block btn-lg no-class" disabled>Click Me</button>
-		<button ng-click="changeUrl()" class="btn btn-success btn-block btn-lg">Click Me</button>
-		<hr>
-		<form>
-			<div class="input-group">
-				<span class="input-group-addon" id="basic-addon1">Name</span>
-				<label for="" class="sr-only">Name</label>
+<body ng-controller="myController as vm">
+<div class="jumbotron">
+    <h1 class="text-center">Hello World.</h1>
+</div>
+<br>
+<br>
+<br>
+<div class="container">
+    <button ng-click="vm.changeUrl()" class="btn btn-marcus btn-block btn-lg no-class btn-" disabled>Click Me</button>
+    <button ng-click="vm.changeUrl()" class="btn btn-success btn-block btn-lg">Click Me</button>
+    <hr>
+    <form>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Name</span>
+            <label for="" class="sr-only">Name</label>
 
-				<input type="text" name="" id="" class="form-control">
-				<span class="input-group-addon" id="basic-addon1">Last</span>
-			</div>
+            <input type="text" name="" id="" class="form-control">
+            <span class="input-group-addon" id="basic-addon1">Last</span>
+        </div>
 
-			<div class="form-group has-marcus">
-				<label class="control-label" for="">Name</label>
-				<input type="text" name="" id="" class="form-control">
-				 <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>
-			</div>
-		</form>
-		<hr>
+        <div class="form-group has-marcus">
+            <label class="control-label" for="">Name</label>
+            <input type="text" name="" id="" class="form-control">
+            <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>
+        </div>
+    </form>
+    <hr>
 
-		<div class="list-group">
-			<button type="button" class="list-group-item list-group-item-marcus">Cras justo odio</button>
-			<button type="button" class="list-group-item list-group-item-marcus">Dapibus ac facilisis in</button>
-			<button type="button" class="list-group-item list-group-item-marcus">Morbi leo risus</button>
-			<button type="button" class="list-group-item list-group-item-marcus">Porta ac consectetur ac</button>
-			<button type="button" class="list-group-item list-group-item-marcus">Vestibulum at eros</button>
-		</div>
-	</div>
-	<!--<script src="libs/jquery/dist/jquery.min.js"></script>
-		<script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
-		<script src="libs/angular/angular.min.js"></script>-->
-	<script src="dist/js/bundle.js"></script>
+    <div class="list-group">
+        <button type="button" class="list-group-item list-group-item-marcus">Cras justo odio</button>
+        <button type="button" class="list-group-item list-group-item-marcus">Dapibus ac facilisis in</button>
+        <button type="button" class="list-group-item list-group-item-marcus">Morbi leo risus</button>
+        <button type="button" class="list-group-item list-group-item-marcus">Porta ac consectetur ac</button>
+        <button type="button" class="list-group-item list-group-item-marcus">Vestibulum at eros</button>
+    </div>
+</div>
+<!--<script src="libs/jquery/dist/jquery.min.js"></script>
+    <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="libs/angular/angular.min.js"></script>-->
+<script src="dist/js/bundle.js"></script>
 </body>
 
 </html>
