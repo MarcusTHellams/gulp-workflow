@@ -17,6 +17,8 @@ var gulp = require('gulp'),
 	autoprefixer = require('gulp-autoprefixer'),
 	concat2 = require('gulp-concat-sourcemap'),
 	merge = require('gulp-merge'),
+	gulpif = require('gulp-if'),
+	minimist = require('minimist'),
 	filesToConcat = [
 		'public/libs/jquery/dist/jquery.min.js',
 		'public/libs/bootstrap/dist/js/bootstrap.min.js',
@@ -31,6 +33,16 @@ var gulp = require('gulp'),
 		sassPath: 'public/sass/',
 		bowerDir: 'public/libs/'
 	};
+
+
+var knownOptions = [{
+	string: 'env',
+	default: { env: process.env.NODE_ENV || 'production' }
+}];
+
+
+var options = minimist(process.argv.slice(2), knownOptions);
+
 
 gulp.task('strip', function () {
 	gulp.src('public/js/main.js')
@@ -48,9 +60,10 @@ var g = gulp.task('replace', function () {
 
 
 gulp.task('concatAndMinify', function (done) {
+	console.log(options);
 	merge(
 		gulp.src(filesToConcat)
-			.pipe(replace(/console\.log\(.+?\)/g, 'void 0'))
+			.pipe(gulpif(options.env === 'production', replace(/console\.log\(.+?\)/g, 'void 0')))
 	)
 		.pipe(source.init())
 		.pipe(concat('bundle.js'))
@@ -115,7 +128,6 @@ gulp.task('sass', function (done) {
 		.pipe(clean())
 		.pipe(source.write())
 		.pipe(gulp.dest('public/css/'))
-		.pipe(connect.reload());
 	done();
 });
 

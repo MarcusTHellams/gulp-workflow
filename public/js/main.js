@@ -4,9 +4,10 @@
     angular.module('myApp', [])
         .controller('myController', myController);
 
-        console.log('goodbye');
-        console.log('Hello');
-    
+    console.log('goodbye');
+    console.log('Hello');
+    console.log('Yes me');
+
 
 
     var marko = "not my fight";
