@@ -18,7 +18,6 @@
         vm.changeUrl = changeUrl;
 
         function changeUrl() {
-            debugger;
             console.warn(marko);
             $location.url('readyToGo');
             $location.replace();

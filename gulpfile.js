@@ -1,3 +1,4 @@
+/* jshint -W117 */
 var gulp = require('gulp'),
     server = require('gulp-webserver'),
     watch = require('gulp-watch'),
@@ -61,7 +62,6 @@ var g = gulp.task('replace', function () {
 
 
 gulp.task('concatAndMinify', function (done) {
-    console.log(options);
     merge(
         gulp.src(filesToConcat)
             .pipe(gulpif(options.env === 'production', replace(/console\.log\(.+?\)/g, 'void 0')))
