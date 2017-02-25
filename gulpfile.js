@@ -97,7 +97,7 @@ gulp.task('concatAndMinify', function (done) {
 
 });
 
-gulp.task('sass', function (done) {
+gulp.task('sass', ['icons'], function (done) {
     // gulp.src(['public/sass/**/*.scss'])
     // 	.pipe(sass({
     // 		includePaths: [
@@ -121,7 +121,8 @@ gulp.task('sass', function (done) {
             sourcemap: true,
             loadPath: [
                 config.sassPath,
-                config.bowerDir + 'bootstrap-sass/assets/stylesheets/'
+                config.bowerDir + 'bootstrap-sass/assets/stylesheets/',
+                config.bowerDir + 'font-awesome/scss/'
             ]
         })
         .on('error', sass.logError)
@@ -130,6 +131,11 @@ gulp.task('sass', function (done) {
         .pipe(source.write())
         .pipe(gulp.dest('public/css/'))
     done();
+});
+
+gulp.task('icons', function () {
+    return gulp.src(config.bowerDir + 'font-awesome/fonts/**.*')
+        .pipe(gulp.dest('./public/fonts'));
 });
 
 gulp.task('one', function (cb) {
